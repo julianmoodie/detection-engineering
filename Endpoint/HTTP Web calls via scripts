@@ -1,5 +1,3 @@
-
-
 ( CommandLine="*http://*" AND CommandLine="*Invoke-WebRequest*" 
 OR CommandLine="*iwr*" OR CommandLine="*certutil*" 
 OR CommandLine="*curl*" OR CommandLine="*wget*" ) AND ( CommandLine="*POST*"
