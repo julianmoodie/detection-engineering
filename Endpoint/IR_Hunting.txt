@@ -1,3 +1,5 @@
+#Suspicious Commandline
+
 Get-WinEvent -FilterHashtable @{
     LogName = "Microsoft-Windows-PowerShell/Operational"
 } | Where-Object {
@@ -9,7 +11,7 @@ Get-WinEvent -FilterHashtable @{
     $_.Message -like "*curl*" -or
 }
 
-
+#Reg keys
 
 $keys @(
     "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run",
@@ -22,13 +24,16 @@ foreach ($key in $keys) {
     Write-Output $key
 }
 
+
+#Sch tasks
 Get_ScheduledTask | Where-Object($_.TaskPath -notlike "\microsoft*")
 
 
-
+#Application
 $regex = /anydesk|teamviewer|cloudflared/i
 Get-EventLog -LogName Application | Where-Object { $_.ProviderName - like "*AppName*" }
 
+#Network
 
 netstat -nop 
 netstat -ano
