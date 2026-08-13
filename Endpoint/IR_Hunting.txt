@@ -1,0 +1,34 @@
+Get-WinEvent -FilterHashtable @{
+    LogName = "Microsoft-Windows-PowerShell/Operational"
+} | Where-Object {
+    $_.Message -like "*-enc*" -or 
+    $_.Message -like "*-EncodedCommand*" -or
+    $_.Message -like "* -iwr*" -or
+    $_.Message -like "*Invoke*" -or
+    $_.Message -like "*invoke*" -or
+    $_.Message -like "*curl*" -or
+}
+
+
+
+$keys @(
+    "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run",
+    "HKLM:\Software\Microsoft\Windows\CurrentVersion\Run",
+    "HKCU:\Software\Microsoft\Windows\CurrentVersion\RunOnce",
+    "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce"
+)
+
+foreach ($key in $keys) {
+    Write-Output $key
+}
+
+Get_ScheduledTask | Where-Object($_.TaskPath -notlike "\microsoft*")
+
+
+
+$regex = /anydesk|teamviewer|cloudflared/i
+Get-EventLog -LogName Application | Where-Object { $_.ProviderName - like "*AppName*" }
+
+
+netstat -nop 
+netstat -ano
