@@ -1,5 +1,0 @@
-( CommandLine="*http://*" AND CommandLine="*Invoke-WebRequest*" 
-OR CommandLine="*iwr*" OR CommandLine="*certutil*" 
-OR CommandLine="*curl*" OR CommandLine="*wget*" ) AND ( CommandLine="*POST*"
-OR CommandLine="*PUT*" OR CommandLine="*PATCH*" ) 
-AND CommandLine!="*127.0.0.1*" AND CommandLine!="*localhost*" 
